@@ -35,6 +35,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldControl, MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatDialogActions, MatDialogModule } from '@angular/material/dialog';
+import { OrderCompleteComponent } from './components/order-area/order-complete/order-complete.component';
+
 
 
 
@@ -67,7 +70,8 @@ import { MatInputModule } from '@angular/material/input';
     ProductCardUserComponent,
     ProductListUserComponent,
     OrderDetailsComponent,
-    OrderProcessComponent
+    OrderProcessComponent,
+    OrderCompleteComponent
 
   ],
   imports: [
@@ -75,6 +79,7 @@ import { MatInputModule } from '@angular/material/input';
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDialogModule,
     AppRoutingModule,
     FormsModule,//Two way binding
     HttpClientModule, //http

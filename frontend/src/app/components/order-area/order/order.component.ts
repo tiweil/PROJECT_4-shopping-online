@@ -8,5 +8,9 @@ import { Router } from '@angular/router';
 })
 export class OrderComponent {
 
+  constructor(private router:Router){}
 
+  public toLayoutPage(){
+    this.router.navigateByUrl("/layout-user");
+  }
 }

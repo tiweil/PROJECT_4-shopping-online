@@ -18,6 +18,7 @@ export class ItemsCartComponent implements OnInit {
 public client: ClientModel;
 public myCart: CartModel;
 public items: ItemModel[];
+public temp: ItemModel[];
 
 constructor(private itemService: ItemService,private router: Router) {}
 public toOrderPage(){
@@ -25,30 +26,46 @@ public toOrderPage(){
 }
 
 public async ngOnInit() {
+  try {
+    this.myCart = clientStore.getState().cart;
+    //listening to changes
+    clientStore.subscribe(() => {
+      this.myCart = clientStore.getState().cart;
+    })
 
+    this.items = await this.itemService.itemsByCart(this.myCart._id);
+    console.log(this.items);
+    this.productItem = this.items[0].productId;
+    console.log(this.items[0].productId);
+    this.temp=this.items;
+    } catch (error) {
+    console.log(error);
+  }
   }
 
-public productItem: string;
+public productItem: any;
 public async itemToCart() {
-try {
-  this.myCart = clientStore.getState().cart;
-  //listening to changes
-  clientStore.subscribe(() => {
+  try {
     this.myCart = clientStore.getState().cart;
-  })
-  this.items = await this.itemService.itemsByCart(this.myCart._id);
-  console.log(this.items);
-  this.productItem = this.items[0].productId;
-  console.log(this.items[0].productId);
-  } catch (error) {
-  console.log(error);
-}
+    //listening to changes
+    clientStore.subscribe(() => {
+      this.myCart = clientStore.getState().cart;
+    })
+
+    this.items = await this.itemService.itemsByCart(this.myCart._id);
+    console.log(this.items);
+    this.productItem = this.items[0].productId;
+    console.log(this.items[0].productId);
+    this.temp=this.items;
+    } catch (error) {
+    console.log(error);
+  }
 }
 public async deleteItem(id: string) {
   console.log(id);
   try {
     if(!window.confirm("Are you sure?")) return;
-    await this.itemService.deleteItem(id);
+    this.temp=await this.itemService.deleteItem(id);
     alert("Product has been deleted");
   } catch (err) {
     alert(err);

@@ -53,10 +53,10 @@ export class ProductListUserComponent implements OnInit {
   public newItem: ItemModel;
 public async addToCart(product: ProductModel) {
   console.log(product);
-  this.newItem={productId:product._id,
+  this.newItem={productId:product,
                 qty:1,
                 total_price:product.price,
-                cartId:clientStore.getState().cart._id
+                cartId:clientStore.getState().cart
   }
   console.log( this.newItem);
 

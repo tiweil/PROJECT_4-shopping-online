@@ -4,6 +4,8 @@ import { OrderModel } from 'src/app/models/order.model';
 import { clientStore } from 'src/app/redux/login-state';
 import { LoginService } from 'src/app/services/login.service';
 import { OrderService } from 'src/app/services/order.service';
+import { OrderCompleteComponent } from '../order-complete/order-complete.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -17,10 +19,12 @@ export class OrderProcessComponent implements OnInit{
   public myForm: FormGroup;
   public myCountry:string = "israel";
   public newOrder = new OrderModel();
+  public isActive:boolean=false;
 
   constructor(private formBuilder: FormBuilder,
               private orderService: OrderService,
-              private loginService: LoginService ) {
+              private loginService: LoginService,
+              public dialog: MatDialog ) {
     this.myForm = this.formBuilder.group({
       city: ['', Validators.required],
       street: ['', Validators.required],
@@ -32,7 +36,14 @@ export class OrderProcessComponent implements OnInit{
   public async ngOnInit() {
     this.cities = await this.loginService.getCities(this.myCountry);
   }
+  public openDialog(){
+    this.isActive=true;
+    const dialogRef = this.dialog.open(OrderCompleteComponent);
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   public filterCities(searchText: any): void {
     console.log(searchText);
 

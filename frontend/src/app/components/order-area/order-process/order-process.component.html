@@ -37,14 +37,14 @@
     </div><br/>
     <br/>
 
-    <h5>Sum:</h5><hr/>
+    <!-- <h5>Sum:</h5><hr/>
     <div class="form-group">
       <label for="sum">Sum:</label>
       <input type="text" class="form-control" formControlName="sum">
     </div><br/>
-    <br/>
+    <br/> -->
 
 
-    <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid" mat-button (click)="openDialog()">Submit</button>
   </form>
  </div>

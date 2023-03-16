@@ -1,6 +1,11 @@
 input{
-    width: 35px;
+    width: 40px;
 }
-/* .box {
-    height: 200px;
-} */
+
+img {
+    width: 80px;
+    height: 80px;
+    vertical-align: middle;
+    border: 1px solid;
+    border-radius: 10px;
+}
