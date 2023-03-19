@@ -7,6 +7,11 @@ import { OrderService } from 'src/app/services/order.service';
 import { OrderCompleteComponent } from '../order-complete/order-complete.component';
 import { MatDialog } from '@angular/material/dialog';
 
+//בשביל חסימת תאריכים
+export interface Times {
+    date:string;
+    times:number;
+}
 
 @Component({
   selector: 'app-order-process',
@@ -20,6 +25,11 @@ export class OrderProcessComponent implements OnInit{
   public myCountry:string = "israel";
   public newOrder = new OrderModel();
   public isActive:boolean=false;
+  public allOrders:OrderModel[];
+  blockedDates: string[];
+  // public Times:object={
+
+  // };
 
   constructor(private formBuilder: FormBuilder,
               private orderService: OrderService,
@@ -30,11 +40,40 @@ export class OrderProcessComponent implements OnInit{
       street: ['', Validators.required],
       arrival_date:['',Validators.required],
       last_fourCC:['',[Validators.required,Validators.pattern(/^[0-9]*$/)]],
-      sum:['',Validators.required],
+      // sum:['',Validators.required],
     });
+
+    }
+
+    public checkDates(orders:OrderModel[]){
+      let temp:string[];
+      // let counter:number;
+
+      let allTimes:Times[];
+      for(let i=0,counter=0;i<orders.length;i+=1){
+        let specTime:Times;
+        specTime.date=orders[i].order_date.slice(0,10);
+        for(let j=1;j<=orders.length;j+=1){
+          if(orders[i].order_date===orders[j].order_date){
+            counter+=1;
+          }
+        }
+        specTime.times=counter;
+        allTimes.push(specTime);
+        counter=0;
+      }
+      allTimes.map(item=>{
+        if(item.times>=3){
+          temp.push(item.date)
+        }
+      })
+      return temp;
     }
   public async ngOnInit() {
     this.cities = await this.loginService.getCities(this.myCountry);
+    this.allOrders=await this.orderService.getAllOrders();
+    this.blockedDates=this.checkDates(this.allOrders);
+    console.log(this.allOrders)
   }
   public openDialog(){
     this.isActive=true;

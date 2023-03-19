@@ -16,4 +16,15 @@ export class OrderService {
   const observable = this.http.post<OrderModel>(appConfig.AddOrderUrl , order);
   await firstValueFrom(observable);
   }
+
+  //get all orders
+  public async getAllOrders(): Promise<OrderModel[]> {
+
+    // get the observable
+    const observable = this.http.get<OrderModel[]>(appConfig.getAllOrdersUrl);
+    //convert to promise
+    const orders = await firstValueFrom(observable);
+
+  return orders;
+  }
 }

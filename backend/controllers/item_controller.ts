@@ -53,9 +53,19 @@ const deleteItem= async (request: Request, response: Response, next: NextFunctio
     .catch((err)=> next(err));
 }
 
+// delete all items 
+const deleteAllItems = async (request: Request, response: Response, next: NextFunction) => {
+    const cart_id = request.params.cart; 
+    return ItemModel.deleteMany({"cartId" :cart_id})
+    .then((item)=>
+    (item?response.status(201).json({message:"deleted all"}):response.status(404).json({message:"err"})))
+    .catch((err)=> next(err));
+}
+
 export default{
     getItemsByCart,
     addItem, 
     updateItem,
-    deleteItem
+    deleteItem,
+    deleteAllItems
 }

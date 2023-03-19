@@ -17,10 +17,10 @@ export class ProductService {
     public async getAllProducts(): Promise<ProductModel[]> {
         //take products from global store- redux
     let products = productsStore.getState().products;
-    
+
     if(products.length === 0){
       // get the observable
-      const observable = this.http.get<ProductModel[]>(appConfig.productsUrl); 
+      const observable = this.http.get<ProductModel[]>(appConfig.productsUrl);
       //convert to promise
       products = await firstValueFrom(observable);
        //save products to global store
@@ -29,17 +29,17 @@ export class ProductService {
     return products;
     }
 
-        //get all products
+        //get products by id
     public async getProductById(id:string): Promise<ProductModel> {
-  
+
       // get the observable
-      const observable = this.http.get<ProductModel>(appConfig.getProductByIdUrl + id); 
+      const observable = this.http.get<ProductModel>(appConfig.getProductByIdUrl + id);
       //convert to promise
       const product = await firstValueFrom(observable);
 
       //save product to global store- redux
       //productsStore.dispatch({ type: ProductActionType.SingleProduct, payload: product })
-    
+
     return product;
     }
 
@@ -64,7 +64,7 @@ export class ProductService {
     public async getAllCategory(): Promise<CategoryModel[]> {
 
     // get the observable
-    const observable = this.http.get<CategoryModel[]>(appConfig.getAllCategoryUrl); 
+    const observable = this.http.get<CategoryModel[]>(appConfig.getAllCategoryUrl);
     //convert to promise
     const categories = await firstValueFrom(observable);
 
@@ -78,12 +78,12 @@ export class ProductService {
       // let products = allproducts.filter(p=>p.categoryId===id_cat) ;
       // if(allproducts.length===0){
       // // get the observable
-      // const observable = this.http.get<any>(appConfig.productsByCategory + id_cat); 
+      // const observable = this.http.get<any>(appConfig.productsByCategory + id_cat);
       // //convert to promise
       //  products = await firstValueFrom(observable);
       // }
       // console.log(products);
-      const observable = this.http.get<any>(appConfig.productsByCategory + id_cat); 
+      const observable = this.http.get<any>(appConfig.productsByCategory + id_cat);
       //convert to promise
       const  products = await firstValueFrom(observable);
       return products;

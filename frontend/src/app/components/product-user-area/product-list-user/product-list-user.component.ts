@@ -25,7 +25,7 @@ export class ProductListUserComponent implements OnInit {
       this.products = await this.productService.getAllProducts();
       this.temp=this.products;
       this.categories=await this.productService.getAllCategory();
-     
+
     } catch (err) {
       alert(err);
     }

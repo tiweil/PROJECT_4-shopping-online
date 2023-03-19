@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import {htmlToText} from 'html-to-text';
 // import * as jsPDF from 'jspdf';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -12,21 +13,16 @@ import html2canvas from 'html2canvas';
 export class OrderCompleteComponent {
   @ViewChild('htmlData') htmlData!: ElementRef;
 
-  // public async generatePDF() {
-  //   const doc = new jspdf();
-  //   const specialElementHandlers = {
-  //     '#editor': function (element, renderer) {
-  //       return true;
-  //     }
-  //   };
-
-  //   await doc.fromHTML(document.getElementById('my-html-component'), 15, 15, {
-  //     'width': 170,
-  //     'elementHandlers': specialElementHandlers
-  //   });
-
-  //   doc.save('example.pdf');
+  // convertHtmlToText() {
+  //   let DATA: any = document.getElementById('htmlData');
+  //   const text = htmlToText(`DATA`);
+  //   const file = new Blob([text], {type: 'text/plain'});
+  //   const downloadLink = document.createElement('a');
+  //   downloadLink.href = window.URL.createObjectURL(file);
+  //   downloadLink.download = 'receipt.txt';
+  //   downloadLink.click();
   // }
+
   public openPDF(): void {
     let DATA: any = document.getElementById('htmlData');
     html2canvas(DATA).then((canvas) => {
@@ -39,6 +35,8 @@ export class OrderCompleteComponent {
       PDF.save('receipt.pdf');
     })
   }
+
+
 
 }
 

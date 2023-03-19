@@ -9,6 +9,7 @@ import { ItemService } from 'src/app/services/item.service';
 //רק לבדיקה
 export interface Transaction {
   item: string;
+  qty:number;
   cost: number;
 }
 
@@ -42,7 +43,9 @@ export class OrderDetailsComponent implements OnInit{
       clientStore.subscribe(() => {
         this.myCart = clientStore.getState().cart;
       })
+
       this.items = await this.itemService.itemsByCart(this.myCart._id);
+      console.log(this.items[0].productId);
     }catch(error){
       console.log(error);
     }
@@ -52,14 +55,14 @@ export class OrderDetailsComponent implements OnInit{
   public toLayoutPage(){
     this.router.navigateByUrl("/layout-user");
   }
-    displayedColumns = ['item', 'cost'];
+    displayedColumns = ['item','qty', 'cost'];
     transactions: Transaction[] = [
-      {item: 'Beach ball', cost: 4},
-      {item: 'Towel', cost: 5},
-      {item: 'Frisbee', cost: 2},
-      {item: 'Sunscreen', cost: 4},
-      {item: 'Cooler', cost: 25},
-      {item: 'Swim suit', cost: 15},
+      {item: 'Beach ball',qty:5, cost: 4},
+      {item: 'Towel',qty:20, cost: 5},
+      {item: 'Frisbee',qty:6, cost: 2},
+      {item: 'Sunscreen',qty:78, cost: 100},
+      {item: 'Cooler',qty:15, cost: 25},
+      {item: 'Swim suit',qty:77, cost: 15},
     ];
 
     /** Gets the total cost of all transactions. */
