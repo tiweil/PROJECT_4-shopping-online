@@ -1,10 +1,10 @@
 <p>cart works!</p>
 <div class="box">
-    <img src="item.productId.image" /> 
+    <img src="{{item.productId.image}}" /> <br/>
     name:{{item.productId.name}} <br/>
     qty:{{item.qty}}<input type="number" [(ngModel)]="item.qty"(ngModelChange)="onQuantityChange()" /><br/>
-    price: {{item.productId.price}}
-    total price:{{item.total_price | currency:"ILS" }}<br/>
+    price: {{item.productId.price}} <br/>
+    total price:{{item.total_price | currency:"ILS" }} <br/>
     <button (click)="deleteItem()" >🗑</button><br/>
 </div>
 

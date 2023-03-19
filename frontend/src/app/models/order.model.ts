@@ -1,7 +1,10 @@
+import { CartModel } from './cart.model';
+import { ClientModel } from './client.model';
+
 export class OrderModel {
   _id?: string;
-  clientId?: string;
-  cartId?: string;
+  clientId?: ClientModel;
+  cartId?: CartModel;
   sum: number;
   city: string;
   street: string;

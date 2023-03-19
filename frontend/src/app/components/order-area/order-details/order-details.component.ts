@@ -21,6 +21,7 @@ export interface Transaction {
 export class OrderDetailsComponent implements OnInit{
   public myCart: CartModel;
   public items: ItemModel[];
+  public allItems :ItemModel[];
   public allProducts: ProductModel[];
   public temp:ProductModel[];
   @Input() isModal:boolean;
@@ -41,9 +42,7 @@ export class OrderDetailsComponent implements OnInit{
       clientStore.subscribe(() => {
         this.myCart = clientStore.getState().cart;
       })
-
       this.items = await this.itemService.itemsByCart(this.myCart._id);
-      console.log(this.items[0].productId);
     }catch(error){
       console.log(error);
     }

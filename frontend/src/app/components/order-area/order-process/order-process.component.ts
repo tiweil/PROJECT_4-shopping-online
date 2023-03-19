@@ -64,8 +64,8 @@ export class OrderProcessComponent implements OnInit{
   // If the form is valid, proceed with sending the data to the backend
   const formData = this.myForm.value;
   this.newOrder = new OrderModel();
-  this.newOrder.clientId = clientStore.getState().client._id ;
-  this.newOrder.cartId = clientStore.getState().cart._id ;
+  this.newOrder.clientId._id = clientStore.getState().client._id ;
+  this.newOrder.cartId._id = clientStore.getState().cart._id ;
   this.newOrder.sum = formData.sum;
   this.newOrder.city = formData.city;
   this.newOrder.street = formData.street;

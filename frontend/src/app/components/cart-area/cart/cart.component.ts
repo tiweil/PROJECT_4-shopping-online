@@ -18,8 +18,6 @@ public item: ItemModel;
 @Output()
 public deleteMe = new EventEmitter<string>();
 
-
-constructor(private productService: ProductService) { }
 public async ngOnInit() {
 
 }

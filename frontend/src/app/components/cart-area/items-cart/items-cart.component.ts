@@ -21,6 +21,7 @@ public items: ItemModel[];
 public temp: ItemModel[];
 
 constructor(private itemService: ItemService,private router: Router) {}
+
 public toOrderPage(){
   this.router.navigateByUrl("/order");
 }
@@ -32,18 +33,14 @@ public async ngOnInit() {
     clientStore.subscribe(() => {
       this.myCart = clientStore.getState().cart;
     })
-
     this.items = await this.itemService.itemsByCart(this.myCart._id);
-    console.log(this.items);
-    this.productItem = this.items[0].productId;
-    console.log(this.items[0].productId);
+
     this.temp=this.items;
     } catch (error) {
     console.log(error);
   }
   }
 
-public productItem: any;
 public async itemToCart() {
   try {
     this.myCart = clientStore.getState().cart;
@@ -51,11 +48,7 @@ public async itemToCart() {
     clientStore.subscribe(() => {
       this.myCart = clientStore.getState().cart;
     })
-
     this.items = await this.itemService.itemsByCart(this.myCart._id);
-    console.log(this.items);
-    this.productItem = this.items[0].productId;
-    console.log(this.items[0].productId);
     this.temp=this.items;
     } catch (error) {
     console.log(error);
@@ -65,8 +58,10 @@ public async deleteItem(id: string) {
   console.log(id);
   try {
     if(!window.confirm("Are you sure?")) return;
-    this.temp=await this.itemService.deleteItem(id);
+    await this.itemService.deleteItem(id);
     alert("Product has been deleted");
+    this.items = await this.itemService.itemsByCart(this.myCart._id);
+    this.temp=this.items;
   } catch (err) {
     alert(err);
   }
