@@ -32,7 +32,7 @@ export function clientReducer(currentState = new AuthState(), action: AuthAction
         case AuthActionType.Register: 
         case AuthActionType.Login:
             newState.client = action.payload;
-            //console.log(action.payload);
+            console.log( newState.client._id);
             localStorage.setItem("email", JSON.stringify(newState.client));
             break;
 

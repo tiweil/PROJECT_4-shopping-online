@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryModel } from 'src/app/models/category.model';
 import { ItemModel } from 'src/app/models/item.model';
 import { ProductModel } from 'src/app/models/product.model';
+import { itemStore } from 'src/app/redux/item-state';
 import { clientStore } from 'src/app/redux/login-state';
 import { ItemService } from 'src/app/services/item.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -17,6 +18,7 @@ export class ProductListUserComponent implements OnInit {
   public searchTerm: string;
   public temp:ProductModel[]=[];
   public isExist:boolean=true;
+  public newItem: ItemModel;
 
   constructor(private productService: ProductService, private itemService: ItemService) {}
 
@@ -25,7 +27,6 @@ export class ProductListUserComponent implements OnInit {
       this.products = await this.productService.getAllProducts();
       this.temp=this.products;
       this.categories=await this.productService.getAllCategory();
-
     } catch (err) {
       alert(err);
     }
@@ -50,9 +51,9 @@ export class ProductListUserComponent implements OnInit {
     }
   }
 
-  public newItem: ItemModel;
+
 public async addToCart(product: ProductModel) {
-  console.log(product);
+  //console.log(product);
   this.newItem={productId:product,
                 qty:1,
                 total_price:product.price,
@@ -61,26 +62,19 @@ public async addToCart(product: ProductModel) {
   console.log( this.newItem);
 
   try {
-    if(!window.confirm("Are you sure?")) return;
-    await this.itemService.AddItemToCart(this.newItem);
-    alert("Product has been add to your cart");
+    //if(!window.confirm("Are you sure?")) return;
+    let allItems =  itemStore.getState().items;
+    let isItem = allItems.filter(i => i._id === this.newItem._id);
+    if(isItem.length===0){
+      await this.itemService.AddItemToCart(this.newItem);
+      alert("Product has been add to your cart");
+    }else{
+      alert("Product is exist");
+    }
+
   } catch (err) {
     alert(err);
   }
 }
-  // onSearch() {
-  //   // this.products.map((item)=>{
-  //   //   if( item.name.includes(this.searchTerm)){
-  //   //     this.temp.push(item);
-  //   //   }
-  //   // })
-  //   console.log(this.searchTerm);
-  //   this.temp = this.products.filter(item => {
-  //     console.log(item.name)
-  //     return (item.name.includes(this.searchTerm));
-  //   });
-  //   this.products=this.temp;
-  //   console.log(this.temp);
-  // }
 
 }

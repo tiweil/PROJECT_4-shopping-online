@@ -4,6 +4,7 @@ import { CartModel } from 'src/app/models/cart.model';
 import { ClientModel } from 'src/app/models/client.model';
 import { ItemModel } from 'src/app/models/item.model';
 import { ProductModel } from 'src/app/models/product.model';
+import { itemStore } from 'src/app/redux/item-state';
 import { clientStore } from 'src/app/redux/login-state';
 import { ItemService } from 'src/app/services/item.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -21,6 +22,7 @@ public items: ItemModel[];
 public productItem: string;
 
 constructor(private itemService: ItemService,private router: Router) {}
+
 public toOrderPage(){
   this.router.navigateByUrl("/order");
 }
@@ -28,11 +30,13 @@ public toOrderPage(){
 public async ngOnInit() {
   try {
     this.myCart = clientStore.getState().cart;
-    //listening to changes
     clientStore.subscribe(() => {
       this.myCart = clientStore.getState().cart;
     })
     this.items = await this.itemService.itemsByCart(this.myCart._id);
+    itemStore.subscribe(() => {
+      this.items = itemStore.getState().items;
+    })
     console.log(this.items);
     } catch (error) {
     console.log(error);
@@ -41,8 +45,6 @@ public async ngOnInit() {
 
 public async itemToCart() {
   try {
-    this.myCart = clientStore.getState().cart;
-    //listening to changes
     clientStore.subscribe(() => {
       this.myCart = clientStore.getState().cart;
     })
@@ -56,7 +58,6 @@ public async deleteItem(id: string) {
     if(!window.confirm("Are you sure?")) return;
     await this.itemService.deleteItem(id);
     alert("Item has been deleted");
-    this.items = await this.itemService.itemsByCart(this.myCart._id);
   } catch (err) {
     alert(err);
   }

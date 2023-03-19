@@ -27,6 +27,8 @@ export class OrderProcessComponent implements OnInit{
   public isActive:boolean=false;
   public allOrders:OrderModel[];
   blockedDates: string[];
+  public myClient_id: string;
+  public myCart_id: string;
   // public Times:object={
 
   // };
@@ -72,6 +74,8 @@ export class OrderProcessComponent implements OnInit{
   public async ngOnInit() {
     this.cities = await this.loginService.getCities(this.myCountry);
     this.allOrders=await this.orderService.getAllOrders();
+    this.myClient_id = clientStore.getState().client._id;
+    this.myCart_id = clientStore.getState().cart._id ;
     this.blockedDates=this.checkDates(this.allOrders);
     console.log(this.allOrders)
   }
@@ -103,8 +107,8 @@ export class OrderProcessComponent implements OnInit{
   // If the form is valid, proceed with sending the data to the backend
   const formData = this.myForm.value;
   this.newOrder = new OrderModel();
-  this.newOrder.clientId._id = clientStore.getState().client._id ;
-  this.newOrder.cartId._id = clientStore.getState().cart._id ;
+  this.newOrder.clientId._id = this.myClient_id ;
+  this.newOrder.cartId._id = this.myCart_id ;
   this.newOrder.sum = formData.sum;
   this.newOrder.city = formData.city;
   this.newOrder.street = formData.street;
