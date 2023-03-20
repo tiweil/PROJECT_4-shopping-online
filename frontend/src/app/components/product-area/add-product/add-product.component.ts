@@ -15,8 +15,11 @@ export class AddProductComponent implements OnInit {
   public productForm: FormGroup;
   constructor(private productService: ProductService, private fb: FormBuilder, private router:Router) {}
 
+  public backToMenu(){
+    this.router.navigateByUrl("/layout-admin");
+  }
+
   async ngOnInit() {
-    
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       categoryId: ['', [Validators.required]],

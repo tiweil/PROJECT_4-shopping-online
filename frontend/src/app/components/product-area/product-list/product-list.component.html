@@ -1,5 +1,6 @@
 <p>product-list works!</p>
 <div class="scroll">
+  <button class="back" (click)="backToMenu()">➡ </button>
   <app-product-card *ngFor="let p of products" [product]="p" (deleteMe)="deleteProduct(p._id)" ></app-product-card>
 
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartModel } from 'src/app/models/cart.model';
 import { ProductModel } from 'src/app/models/product.model';
 import { ItemService } from 'src/app/services/item.service';
@@ -14,10 +15,12 @@ export class HomeComponent implements OnInit{
   public products: ProductModel[];
   public amountOfProducts:number=0;
   public carts:CartModel[];
-  //DI= Dependency Injection, we get object kind of service
-  //angular inject object by constructor to this component
-  constructor(private productService: ProductService, private itemService:ItemService) {}
 
+  constructor(private router:Router,private productService: ProductService, private itemService:ItemService) {}
+
+  public backToMenu(){
+    this.router.navigateByUrl("/layout-admin");
+  }
   public async ngOnInit() {
     try {
       this.products = await this.productService.getAllProducts();

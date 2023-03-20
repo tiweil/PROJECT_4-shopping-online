@@ -66,6 +66,8 @@ public async addToCart(product: ProductModel) {
     let existingProduct  = this.allItems.find(i => i.productId._id === this.newItem.productId._id);
     console.log(existingProduct);
     if(existingProduct){
+      existingProduct.qty += 1;
+      existingProduct.total_price = existingProduct.qty * existingProduct.productId.price ;
       await this.itemService.updateItem(existingProduct);
     }else{
       await this.itemService.AddItemToCart(this.newItem);
