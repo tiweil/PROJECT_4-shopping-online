@@ -20,6 +20,7 @@ class AppConfig {
     public itemsByCart = "http://localhost:3004/items/all/";
     public deleteItemUrl = "http://localhost:3004/items/del/";
     public deleteAllItems = "http://localhost:3004/items/del_all/"
+    public updateItemUrl = "http://localhost:3004/items/update/"
     //order
     public AddOrderUrl = "http://localhost:3004/order/add";
     public getAllOrdersUrl="http://localhost:3004/order/all";

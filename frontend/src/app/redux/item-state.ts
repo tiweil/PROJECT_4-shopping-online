@@ -47,6 +47,7 @@ export function itemsReducer(currentState = new ItemState(), action:ItemAction):
             }
             break;
 
+            case ItemActionType.UpdateItem:
             case ItemActionType.FindItem://the payload here is the single product by id
             newState.items.filter(i => i !== action.payload);
             newState.items[0] = action.payload;
@@ -58,10 +59,8 @@ export function itemsReducer(currentState = new ItemState(), action:ItemAction):
             console.log(newState.items);
             break;
 
-            case ItemActionType.UpdateItem:
-            newState.items= [];
-            console.log(newState.items);
-            break;
+
+
    }
     return newState;
 }

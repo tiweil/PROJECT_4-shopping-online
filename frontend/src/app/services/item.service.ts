@@ -55,8 +55,17 @@ public async itemsByCart(cartId: string): Promise<ItemModel[]> {
       const observable = this.http.delete<ItemModel>(appConfig.deleteAllItems + cart_id);
       await firstValueFrom(observable);
       itemStore.dispatch({ type: ItemActionType.DeleteAll, payload:cart_id  })
-
       }
+
+    //update item
+    public async updateItem(item: ItemModel): Promise<void> {
+      item.qty += 1;
+      item.total_price = item.qty * item.productId.price ;
+      const observable = this.http.patch<ItemModel>(appConfig.updateItemUrl + item._id, item);
+      await firstValueFrom(observable);
+      itemStore.dispatch({ type: ItemActionType.UpdateItem, payload: item })
+
+    }
 
 }
 
