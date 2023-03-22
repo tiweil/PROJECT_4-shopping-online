@@ -40,7 +40,9 @@ import { OrderCompleteComponent } from './components/order-area/order-complete/o
 import { HighlighterPipe } from './highlighter.pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 @NgModule({
@@ -82,9 +84,12 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
+    MatToolbarModule,
     MatDialogModule,
     MatDatepickerModule,
+    MatButtonToggleModule,
     MatNativeDateModule,
+    MatSidenavModule,
     AppRoutingModule,
     FormsModule,//Two way binding
     HttpClientModule, //http
@@ -93,6 +98,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   exports: [
     MatFormFieldModule,
     MatInputModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [LoginMainComponent]

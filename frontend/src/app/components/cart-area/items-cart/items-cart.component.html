@@ -1,17 +1,17 @@
-<div class="scroll">
-<button (click)="itemToCart()">רענן</button>
+<div class="scroll" style="margin: 15px;padding-bottom: 15px;">
+  <!-- <button class="btn btn-outline-primary" (click)="itemToCart()">Refresh</button> -->
 
-<div *ngIf="!myCart">
+  <div *ngIf="!myCart" >
 
-    <app-empty-cart></app-empty-cart>
+      <app-empty-cart></app-empty-cart>
 
-</div>
+  </div>
 
-<div *ngIf="myCart">
+  <div *ngIf="myCart" >
 
-  <app-cart *ngFor="let i of items" [item]="i"  (deleteMe)="deleteItem(i._id)" ></app-cart>
-  <div><label>Total price:</label>{{getTotalCost()}}</div>
-  <button (click)="deleteAll()">delete all</button><br/>
-  <button (click)="toOrderPage()">order</button>
-</div>
+    <app-cart *ngFor="let i of items" [item]="i"  (deleteMe)="deleteItem(i._id)" ></app-cart>
+    <div><span style="background-color: rgb(255, 230, 0);font-weight: bold;"><label>Total price: </label> {{getTotalCost()}}&#8362;</span></div><br/>
+    <button class="btn btn-outline-danger" (click)="deleteAll()">delete all</button><br/><br/>
+    <button class="btn btn-outline-primary" (click)="toOrderPage()">order</button>
+  </div>
 </div>

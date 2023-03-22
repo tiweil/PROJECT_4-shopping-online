@@ -1,0 +1,29 @@
+/* body {
+  border: none !important;
+  margin: 0px !important;
+  padding: 0 !important;
+} */
+/* @media screen and (max-width: 768px) {
+  .nav-link,button,.mat-toolbar{
+    display: none
+  }
+  .nav-link,button,.mat-toolbar{
+    padding: 10px;
+  }
+} */
+.displayCard {
+  text-align: center;
+}
+body{
+  text-align: center;
+
+}
+#card {
+  /* max-width: 50%; */
+
+  display: inline-block;
+  border:2px;
+  border-color: black;
+}
+
+

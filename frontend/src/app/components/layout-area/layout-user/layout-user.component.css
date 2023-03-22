@@ -14,8 +14,15 @@ main {
   grid-column: span 5;
   /* overflow: auto; */
   height: 50%;
+  text-align: center;
 }
 
 div, div > * {
   border: 1px solid;
 }
+body {
+  border: none !important;
+  margin: 0px !important;
+  padding: 0 !important;
+}
+

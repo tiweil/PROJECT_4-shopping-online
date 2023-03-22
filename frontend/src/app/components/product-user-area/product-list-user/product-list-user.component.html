@@ -1,47 +1,27 @@
+<mat-toolbar style="position:sticky;">
+  <mat-toolbar-row>
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" >
+      <mat-button-toggle class="nav-link active" [style.width]="buttonWidth" (click)="sortByCategory('all')" style="font-size: 17px;">All</mat-button-toggle>
+      <mat-button-toggle class="nav-link active" [style.width]="buttonWidth" *ngFor="let c of categories" (click)="sortByCategory(c._id)" style="font-size: 17px;" mat-button color="primary">{{c.name}}</mat-button-toggle>
+    </mat-button-toggle-group>
+    <form class=" input-group w-auto" style="position: absolute; right: 0;margin-right: 25px;" id="search-form" >
+      <input
+        type="search"
+        class="form-control"
+        placeholder="search for item"
+        aria-label="Search"
+        style="width: 150px;height: 35px;margin-top: 20px;"
+        #myInput
+      />
+      <button class="btn btn-outline-primary" [style.width]="buttonWidth" type="button" style="width: 70px;height: 35px;margin-top:20px;" (click)="searchItem(myInput.value)">
+        Search
+      </button>
+    </form>
+  </mat-toolbar-row>
+</mat-toolbar>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <!-- Container wrapper -->
-  <div class="container-fluid">
-
-
-    <!-- Collapsible wrapper -->
-    <div
-      class="collapse navbar-collapse"
-      id="navbarSupportedContent"
-      mdbCollapse
-    >
-      <!-- Left links -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
-        <li class="nav-item">
-          <button class="nav-link active" (click)="sortByCategory('all')" >All</button>
-        </li>
-        <li class="nav-item">
-          <button class="nav-link active" *ngFor="let c of categories" (click)="sortByCategory(c._id)" >{{c.name}}</button>
-        </li>
-      </ul>
-      <!-- Left links -->
-
-      <!-- Search form -->
-      <form class="d-flex input-group w-auto">
-        <input
-          type="search"
-          class="form-control"
-          placeholder="search for item"
-          aria-label="Search"
-          style="width: 150px;height: 35px;"
-          #myInput
-        />
-        <button class="btn btn-outline-primary" type="button" style="width: 70px;height: 35px;" (click)="searchItem(myInput.value)">
-          Search
-        </button>
-      </form>
-    </div>
-    <!-- Collapsible wrapper -->
-  </div>
-  <!-- Container wrapper -->
-</nav>
-<div class="scroll">
-<app-product-card-user *ngFor="let p of temp" [product]="p"  (addItem)="addToCart(p)"></app-product-card-user>
-<div *ngIf="!isExist">"Item doesn't exist"</div>
+<div class="scroll" id="card">
+  <app-product-card-user *ngFor="let p of temp" [product]="p"  (addItem)="addToCart(p)"></app-product-card-user>
+  <div *ngIf="!isExist">"Item doesn't exist"</div>
 
 </div>

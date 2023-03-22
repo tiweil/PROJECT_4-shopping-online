@@ -1,10 +1,7 @@
-<div class="box">
 
-    <img src="{{product.image}}" alt=""/>
-    name:{{product.name}}<br/>
-    price:{{product.price}}<br/>
-    <button (click)="deleteProduct()" >❌</button><br/>
-
-
-
+<div class="card-container">
+  <img class="border-0" src="{{product.image}}" alt=""/><br/>
+  name:{{product.name}}<br/>
+  price:{{product.price}}<br/><br/>
+  <button class="btn btn-outline-danger" (click)="deleteProduct()" >Delete</button><br/>
 </div>

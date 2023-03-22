@@ -8,6 +8,7 @@ import { OrderCompleteComponent } from '../order-complete/order-complete.compone
 import { MatDialog } from '@angular/material/dialog';
 import { ItemModel } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
+import { CartModel } from 'src/app/models/cart.model';
 
 //בשביל חסימת תאריכים
 export interface Times {
@@ -30,6 +31,7 @@ export class OrderProcessComponent implements OnInit{
   public allOrders:OrderModel[];
   public items:ItemModel[];
   public sum:number=0;
+  public myCart:CartModel;
   blockedDates: Date[];
   // public Times:object={
 
@@ -79,6 +81,7 @@ export class OrderProcessComponent implements OnInit{
     this.allOrders=await this.orderService.getAllOrders();
     this.items = await this.itemService.itemsByCart(clientStore.getState().cart._id);
     this.sum=this.items.map(t => t.total_price).reduce((acc, value) => acc + value, 0);
+    this.myCart=clientStore.getState().cart;
     this.blockedDates=this.checkDates(this.allOrders);
     console.log(this.blockedDates)
   }
@@ -123,7 +126,16 @@ export class OrderProcessComponent implements OnInit{
     console.log(temp);
     return Number(temp);
   }
-
+  public async deleteAll() {
+    try {
+      // if(!window.confirm("Are you sure?")) return;
+      await this.itemService.deleteAllItems(this.myCart._id);
+      // alert("Items has been deleted");
+      this.items = await this.itemService.itemsByCart(this.myCart._id);
+    } catch (err) {
+      alert(err);
+    }
+  }
   public async send() {
     if (this.myForm.invalid) {
       // Mark all form controls as touched to trigger the display of validation errors
@@ -139,7 +151,7 @@ export class OrderProcessComponent implements OnInit{
   console.log(clientStore.getState().client._id,clientStore.getState().cart._id,this.sum,formData.city,formData.street,formData.arrival_date,new Date().toISOString(),formData.last_fourCC)
   this.newOrder = new OrderModel();
   this.newOrder.clientId = clientStore.getState().client ;
-  this.newOrder.cartId = clientStore.getState().cart ;
+  this.newOrder.cartId = this.myCart ;
   this.newOrder.sum = this.sum;
   this.newOrder.city = formData.city;
   this.newOrder.street = formData.street;
@@ -149,6 +161,7 @@ export class OrderProcessComponent implements OnInit{
   console.log(this.newOrder);
       try{
         await this.orderService.addOrder(this.newOrder);
+        this.deleteAll();
         console.log("order made successfully");
       }catch(err){
         console.log(err);

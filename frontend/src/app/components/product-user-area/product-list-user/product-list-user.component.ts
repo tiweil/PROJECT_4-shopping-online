@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,HostListener } from '@angular/core';
 import { CategoryModel } from 'src/app/models/category.model';
 import { ItemModel } from 'src/app/models/item.model';
 import { ProductModel } from 'src/app/models/product.model';
@@ -6,6 +6,7 @@ import { itemStore } from 'src/app/redux/item-state';
 import { clientStore } from 'src/app/redux/login-state';
 import { ItemService } from 'src/app/services/item.service';
 import { ProductService } from 'src/app/services/product.service';
+
 
 @Component({
   selector: 'app-product-list-user',
@@ -21,6 +22,22 @@ export class ProductListUserComponent implements OnInit {
   public newItem: ItemModel;
   public allItems : ItemModel[];
 
+  buttonWidth = '85px'; // default button width
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event:any) {
+    // get the window width
+    const windowWidth = event.target.innerWidth;
+
+    // change the button width based on some logic
+    if (windowWidth < 500) {
+      this.buttonWidth = '50px';
+    } else if (windowWidth < 800) {
+      this.buttonWidth = '75px';
+    } else {
+      this.buttonWidth = '100px';
+    }
+  }
   constructor(private productService: ProductService, private itemService: ItemService) {}
 
   public async ngOnInit() {

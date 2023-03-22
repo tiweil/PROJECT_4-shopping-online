@@ -1,9 +1,17 @@
-<div class="box">
-  <!-- <button (click)="deleteProduct()" >❌</button> -->
+<!-- <div class="box">
   <button (click)="addToCart()">🛒</button><br/>
   <img src="{{product.image}}" alt=""/>
   name:{{product.name}}<br/>
   price:{{product.price}}<br/>
 
 
-</div>
+</div> -->
+<!-- <div class="card">
+
+</div> -->
+      <div class="card-container">
+        <button class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="Add to cart" (click)="addToCart()">🛒</button><br/>
+        <img class="border-0" src="{{product.image}}" alt=""/><br><br/>
+        <div><label>name:</label>{{product.name}}</div><br/>
+        <div><label>price:</label>{{product.price}}<br/></div>
+      </div>

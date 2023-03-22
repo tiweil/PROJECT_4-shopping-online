@@ -49,8 +49,8 @@ export class ItemsCartComponent implements OnInit {
         this.myCart = clientStore.getState().cart;
       })
       this.items = await this.itemService.itemsByCart(this.myCart._id);
-      console.log(this.items);
-      } catch (error) {
+       console.log(this.items);
+    } catch (error) {
       console.log(error);
     }
   }
@@ -77,7 +77,11 @@ export class ItemsCartComponent implements OnInit {
 
 
   getTotalCost() {
-    return this.items.map(t => t.total_price).reduce((acc, value) => acc + value, 0);
+    if(this.items){
+      return this.items.map(t => t.total_price).reduce((acc, value) => acc + value, 0);
+    }else{
+      return 0 ;
+    }
   }
 }
 

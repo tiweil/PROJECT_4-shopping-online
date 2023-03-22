@@ -13,6 +13,9 @@ export class LoginComponent {
 
   public existsClient = new ClientModel();
 
+  public backToHome(){
+    this.router.navigateByUrl("/home");
+  }
 
   public myForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
