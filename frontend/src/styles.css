@@ -2,20 +2,19 @@ html, body{
     height: 100%;
     text-align:center;
     margin:0;
+    /* background-image:url(assets/background1.jpg) ; */
     /* background-image: linear-gradient(burlywood, brown); */
     color: black;
 }
-
+.back{
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  height: 40px;
+  width: 40px;
+}
 a {
     color: blue;
-}
-
-.back{
-        position: absolute;
-        top: 70px;
-        right: 20px;
-        height: 40px;
-        width: 40px;
 }
 
 .box {
@@ -42,6 +41,9 @@ form > input, form > button {
 form > label {
     font-size:x-large;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryModel } from 'src/app/models/category.model';
 import { ItemModel } from 'src/app/models/item.model';
 import { ProductModel } from 'src/app/models/product.model';
-import { ItemActionType, itemStore } from 'src/app/redux/item-state';
+import { itemStore } from 'src/app/redux/item-state';
 import { clientStore } from 'src/app/redux/login-state';
 import { ItemService } from 'src/app/services/item.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -20,6 +20,7 @@ export class ProductListUserComponent implements OnInit {
   public isExist:boolean=true;
   public newItem: ItemModel;
   public allItems : ItemModel[];
+
   constructor(private productService: ProductService, private itemService: ItemService) {}
 
   public async ngOnInit() {
@@ -55,28 +56,43 @@ export class ProductListUserComponent implements OnInit {
     }
   }
 
-
-public async addToCart(product: ProductModel) {
-  this.newItem={productId:product,
-                qty:1,
-                total_price:product.price,
-                cartId:clientStore.getState().cart
-  }
-  try {
-    let existingProduct  = this.allItems.find(i => i.productId._id === this.newItem.productId._id);
-    console.log(existingProduct);
-    if(existingProduct){
-      existingProduct.qty += 1;
-      existingProduct.total_price = existingProduct.qty * existingProduct.productId.price ;
-      await this.itemService.updateItem(existingProduct);
-    }else{
-      await this.itemService.AddItemToCart(this.newItem);
-      alert("Product has been add to your cart");
+  public async addToCart(product: ProductModel) {
+    this.newItem={productId:product,
+                  qty:1,
+                  total_price:product.price,
+                  cartId:clientStore.getState().cart
     }
+    try {
+      let existingProduct  = this.allItems.find(i => i.productId._id === this.newItem.productId._id);
+      console.log(existingProduct);
+      let updateItem = existingProduct;
+      if(existingProduct){
+        existingProduct.qty += 1;
+        existingProduct.total_price = existingProduct.qty * existingProduct.productId.price ;
+        await this.itemService.updateItem(updateItem);
+      }else{
+        await this.itemService.AddItemToCart(this.newItem);
+        console.log( this.allItems );
+        alert("Product has been add to your cart");
+      }
 
-  } catch (err) {
-    alert(err);
+    } catch (err) {
+      alert(err);
+    }
   }
-}
+  // onSearch() {
+  //   // this.products.map((item)=>{
+  //   //   if( item.name.includes(this.searchTerm)){
+  //   //     this.temp.push(item);
+  //   //   }
+  //   // })
+  //   console.log(this.searchTerm);
+  //   this.temp = this.products.filter(item => {
+  //     console.log(item.name)
+  //     return (item.name.includes(this.searchTerm));
+  //   });
+  //   this.products=this.temp;
+  //   console.log(this.temp);
+  // }
 
 }

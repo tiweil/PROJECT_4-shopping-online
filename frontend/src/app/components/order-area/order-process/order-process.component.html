@@ -26,24 +26,17 @@
     </div>
 
     <div class="form-group">
-      <label for="arrival_date">Date:</label>
-      <input type="date" class="form-control" formControlName="arrival_date">
+      <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" placeholder="Choose/Enter a delivery date" formControlName="arrival_date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </div><br/>
 
     <h5>Payments:</h5><hr/>
     <div class="form-group">
       <label for="credit">Credit Card:</label>
-      <input type="text" class="form-control" formControlName="last_fourCC">
+      <input type="text" class="form-control" formControlName="last_fourCC" placeholder="Enter 16 digits of credit card">
     </div><br/>
     <br/>
-
-    <!-- <h5>Sum:</h5><hr/>
-    <div class="form-group">
-      <label for="sum">Sum:</label>
-      <input type="text" class="form-control" formControlName="sum">
-    </div><br/>
-    <br/> -->
-
 
     <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid" mat-button (click)="openDialog()">Submit</button>
   </form>

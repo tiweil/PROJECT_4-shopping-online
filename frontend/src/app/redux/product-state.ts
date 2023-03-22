@@ -25,14 +25,14 @@ export interface ProductAction {
 //מקבלת אוביקט וסוג פעולה ומחזירה סטייט חדש
 export function productsReducer(currentState = new ProductState(), action:ProductAction): ProductState {
     const newState = {...currentState};
-    
+
     switch(action.type) {
 
         case ProductActionType.AllProducts://the payload here is the arry list of product
         newState.products = action.payload;
         console.log(action.payload);
         break;
-    
+
         case ProductActionType.AddProduct: //the paylod here is a new product
         if(newState.products.length > 0 ){
             newState.products.push(action.payload);

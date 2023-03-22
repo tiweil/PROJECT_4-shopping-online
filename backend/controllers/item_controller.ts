@@ -19,7 +19,7 @@ const addItem= async (request: Request, response: Response, next: NextFunction) 
         _id:new mongoose.Types.ObjectId(),
         ...item,
     });
-    return newItem
+    return (await newItem.populate(['productId', 'cartId']))
     .save()
     .then((item)=> response.status(201).json(item))
     .catch((err)=> next(err));

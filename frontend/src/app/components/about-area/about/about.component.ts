@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
-
   constructor(private router:Router) {}
 
   public backToMenu(){

@@ -3,6 +3,7 @@ import {htmlToText} from 'html-to-text';
 // import * as jsPDF from 'jspdf';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,6 +13,7 @@ import html2canvas from 'html2canvas';
 })
 export class OrderCompleteComponent {
   @ViewChild('htmlData') htmlData!: ElementRef;
+  constructor(private router:Router){}
 
   // convertHtmlToText() {
   //   let DATA: any = document.getElementById('htmlData');
@@ -22,7 +24,9 @@ export class OrderCompleteComponent {
   //   downloadLink.download = 'receipt.txt';
   //   downloadLink.click();
   // }
-
+  public toLayoutPage(){
+    this.router.navigateByUrl("/layout-user");
+  }
   public openPDF(): void {
     let DATA: any = document.getElementById('htmlData');
     html2canvas(DATA).then((canvas) => {
@@ -34,6 +38,7 @@ export class OrderCompleteComponent {
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
       PDF.save('receipt.pdf');
     })
+    this.toLayoutPage();
   }
 
 

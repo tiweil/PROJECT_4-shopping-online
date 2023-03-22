@@ -24,20 +24,22 @@ export class OrderDetailsComponent implements OnInit{
   public items: ItemModel[];
   public allItems :ItemModel[];
   public allProducts: ProductModel[];
-  public temp:ProductModel[];
+  public temp:ItemModel[];
+  public searchText="";
+
   @Input() isModal:boolean;
   constructor(private itemService: ItemService,private router: Router) {}
 
   public searchItem(data:string){
     const regex: RegExp = new RegExp(data, 'gi');
 
-    this.temp=this.allProducts.filter(item=>{return item.name.includes(data)});
+    this.temp=this.items.filter(item=>{return item.productId.name.includes(data)});
     this.temp.map(item=>{
-      item.name=item.name.replace(regex, '<mark>$&</mark>');
+      item.productId.name=item.productId.name.replace(regex, '<mark>$&</mark>');
     })
   }
-  public async ngOnInit(){
-    try{
+  public async ngOnInit() {
+    try {
       this.myCart = clientStore.getState().cart;
       //listening to changes
       clientStore.subscribe(() => {
@@ -45,28 +47,30 @@ export class OrderDetailsComponent implements OnInit{
       })
 
       this.items = await this.itemService.itemsByCart(this.myCart._id);
+      console.log(this.items);
+      // this.productItem = this.items[0].productId;
       console.log(this.items[0].productId);
-    }catch(error){
+      this.temp=this.items;
+      } catch (error) {
       console.log(error);
     }
-
-  }
+   }
 
   public toLayoutPage(){
     this.router.navigateByUrl("/layout-user");
   }
     displayedColumns = ['item','qty', 'cost'];
-    transactions: Transaction[] = [
-      {item: 'Beach ball',qty:5, cost: 4},
-      {item: 'Towel',qty:20, cost: 5},
-      {item: 'Frisbee',qty:6, cost: 2},
-      {item: 'Sunscreen',qty:78, cost: 100},
-      {item: 'Cooler',qty:15, cost: 25},
-      {item: 'Swim suit',qty:77, cost: 15},
-    ];
+    // transactions: Transaction[] = [
+    //   {item: 'Beach ball',qty:5, cost: 4},
+    //   {item: 'Towel',qty:20, cost: 5},
+    //   {item: 'Frisbee',qty:6, cost: 2},
+    //   {item: 'Sunscreen',qty:78, cost: 100},
+    //   {item: 'Cooler',qty:15, cost: 25},
+    //   {item: 'Swim suit',qty:77, cost: 15},
+    // ];
 
     /** Gets the total cost of all transactions. */
     getTotalCost() {
-      return this.transactions.map(t => t.cost).reduce((acc, value) => acc + value, 0);
+      return this.items.map(t => t.total_price).reduce((acc, value) => acc + value, 0);
     }
 }

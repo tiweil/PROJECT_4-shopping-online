@@ -2,7 +2,10 @@
   <button (click)="toLayoutPage()">back to shopping</button>
 
   <aside>
-    <app-order-details class="order-details"></app-order-details>
+    <!-- <div class="search-input">
+      <label for="">Search here: </label> <input [(ngModel)]="searchText" type="search">
+     </div> -->
+    <app-order-details class="order-details" id="htmlData" ></app-order-details>
   </aside>
   <main>
     <router-outlet ></router-outlet>

@@ -19,7 +19,7 @@ const routes: Routes = [
   { path:"login-main", component: LoginMainComponent },
   { path:"layout-admin", component: LayoutAdminComponent },
   { path:"layout-user", component: LayoutUserComponent},
-  { path: "mainAdmin", component: MenuAdminComponent, outlet: "mainAdmin" },
+  { path: "main", component: MenuAdminComponent, outlet: "mainLogin" },
   { path:"login", component: LoginComponent },
   { path:"home", component: HomeComponent },
   { path:"products", component: ProductListComponent },

@@ -10,6 +10,7 @@
 <div *ngIf="myCart">
 
   <app-cart *ngFor="let i of items" [item]="i"  (deleteMe)="deleteItem(i._id)" ></app-cart>
+  <div><label>Total price:</label>{{getTotalCost()}}</div>
   <button (click)="deleteAll()">delete all</button><br/>
   <button (click)="toOrderPage()">order</button>
 </div>

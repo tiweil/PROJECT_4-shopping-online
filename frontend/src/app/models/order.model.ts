@@ -4,7 +4,7 @@ import { ClientModel } from './client.model';
 export class OrderModel {
   _id: string;
   clientId?: ClientModel;
-  cartId?: CartModel;
+  cartId: CartModel;
   sum: number;
   city: string;
   street: string;
