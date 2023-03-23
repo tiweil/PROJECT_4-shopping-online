@@ -1,43 +1,72 @@
-<h4>Order</h4><hr/>
-<div class="box">
-  <h5>Shipping Details:</h5><hr/>
-  <form [formGroup]="myForm" (ngSubmit)="send()">
+<h2 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-weight: 600;font-size: x-large;">
+  Order</h2>
+  <mat-divider></mat-divider><br/>
 
-    <div class="form-group">
-      <label for="city">City</label>
+<div class="main">
+  <div class="card-container">
+    <h3 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-weight: 600;">
+      Shipping Details:</h3>
+      <mat-divider></mat-divider><br/>
+    <form [formGroup]="myForm" (ngSubmit)="send()">
 
-      <select formControlName="city" class="form-control" (change)="filterCities(myForm.controls['city'].value)">
-        <option value="">--Select a city--</option>
-        <option *ngFor="let city of filteredCities.length > 0 ? filteredCities : cities" [value]="city">{{city}}</option>
-      </select>
-      <div *ngIf="myForm.controls['city'].invalid && (myForm.controls['city'].dirty || myForm.controls['city'].touched)">
-        <small class="text-danger" *ngIf="myForm.controls['city'].errors['required']">
-          City is required
-        </small>
-      </div>
-    </div>
+      <mat-form-field appearance="fill">
+        <mat-label for="city">City</mat-label>
+        <mat-select formControlName="city"  (change)="filterCities(myForm.controls['city'].value)" style="width:max-content;">
+          <mat-option value="">--Select a city--</mat-option>
+          <mat-option *ngFor="let city of filteredCities.length > 0 ? filteredCities : cities" [value]="city">{{city}}</mat-option>
+        </mat-select>
+        <mat-error  *ngIf="myForm.controls['city'].invalid && (myForm.controls['city'].dirty || myForm.controls['city'].touched)">
+          <span class="text-danger" *ngIf="myForm.controls['city'].errors['required']">
+            City is <strong>required</strong>
+          </span>
+        </mat-error>
+      </mat-form-field>
 
-    <div class="form-group">
-      <label for="street">Street:</label>
-      <input type="text" class="form-control" formControlName="street">
-      <div *ngIf="myForm.get('street').invalid && (myForm.get('street').dirty || myForm.get('street').touched)">
-        <div *ngIf="myForm.get('street').errors['required']">Last name is required.</div>
-      </div>
-    </div>
+      <mat-form-field  appearance="fill">
+        <mat-label for="street">Street:</mat-label>
+        <input matInput type="text" formControlName="street">
+        <mat-error  *ngIf="myForm.get('street').invalid && (myForm.get('street').dirty || myForm.get('street').touched)">
+          <span *ngIf="myForm.get('street').errors['required']">Email is <strong>required</strong>
+          </span>
+        </mat-error>
+      </mat-form-field>
 
-    <div class="form-group">
-      <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" placeholder="Choose/Enter a delivery date" formControlName="arrival_date">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </div><br/>
+      <mat-form-field appearance="fill">
+        <mat-label>Choose an arrival date</mat-label>
+        <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" formControlName="arrival_date">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error  *ngIf="myForm.controls['arrival_date'].invalid && (myForm.controls['arrival_date'].dirty || myForm.controls['arrival_date'].touched)">
+          <span class="text-danger" *ngIf="myForm.controls['arrival_date'].errors['required']">
+            Date is <strong>required</strong>
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <!-- <div class="form-group">
+        <label for="arrival_date">Arrival Date:</label>
+        <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" placeholder="Choose/Enter a delivery date" formControlName="arrival_date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div><br/> -->
 
-    <h5>Payments:</h5><hr/>
-    <div class="form-group">
-      <label for="credit">Credit Card:</label>
-      <input type="text" class="form-control" formControlName="last_fourCC" placeholder="Enter 16 digits of credit card">
-    </div><br/>
-    <br/>
+      <h3 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-weight: 600;">
+        Payments:</h3>
+        <mat-divider></mat-divider><br/>
 
-    <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid" mat-button (click)="openDialog()">Submit</button>
-  </form>
- </div>
+      <mat-form-field hintLabel="16 characters" appearance="fill">
+        <mat-label for="last_fourCC">Credit Card:</mat-label>
+        <input matInput #input maxlength="16" minlength="16" type="text" formControlName="last_fourCC" >
+        <mat-hint align="end">{{input.value.length}}/16</mat-hint>
+        <mat-error  *ngIf="myForm.get('last_fourCC').invalid && (myForm.get('last_fourCC').dirty || myForm.get('last_fourCC').touched)">
+          <span *ngIf="myForm.get('last_fourCC').errors['required']">Credit card is <strong>required</strong>
+          </span>
+        </mat-error>
+      </mat-form-field><br/>
+      <br/>
+
+      <button type="submit" class="btn btn-primary position-relative top-80 start-50 end-50 translate-right" [disabled]="myForm.invalid" mat-button (click)="openDialog()">Submit</button>
+    </form>
+   </div>
+
+</div>

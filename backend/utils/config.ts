@@ -1,6 +1,6 @@
 
 class Config { 
-    public port = 3004; 
+    public port = 3006; 
     public mongodbConnectionString = "mongodb://127.0.0.1:27017/project4";
 }
 

@@ -43,6 +43,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -90,6 +93,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatButtonToggleModule,
     MatNativeDateModule,
     MatSidenavModule,
+    MatSelectModule,
+    MatDividerModule,
+    MatIconModule,
     AppRoutingModule,
     FormsModule,//Two way binding
     HttpClientModule, //http

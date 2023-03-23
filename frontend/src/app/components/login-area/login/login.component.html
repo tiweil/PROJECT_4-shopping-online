@@ -1,30 +1,37 @@
 <!-- <p>login works!</p> -->
 <button class="back btn btn-primary" (click)="backToHome()" style="width: max-content;">Back to home page </button>
+<div class="main">
+  <div class="card-container">
+    <h2 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-weight: 600;font-size: x-large;">
+      Login</h2>
+      <mat-divider></mat-divider><br/>
+  <form [formGroup]="myForm" (ngSubmit)="send()" >
 
-<div class="box">
-<form [formGroup]="myForm" (ngSubmit)="send()" >
+    <mat-form-field appearance="fill">
+        <mat-label>Email:</mat-label>
+        <input matInput formControlName="email" type="text" />
+        <!-- validation -->
+        <mat-error *ngIf="myForm.get('email').invalid && (myForm.get('email').dirty || myForm.get('email').touched)" class="text-danger">
+          <span *ngIf="myForm.controls.email.hasError('required')">Email is required.</span>
+          <span *ngIf="myForm.get('email').invalid">Invalid email.</span>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Password:</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'"  formControlName="password" >
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="myForm.get('password').invalid && (myForm.get('password').dirty || myForm.get('password').touched)" class="text-danger">
+          <span *ngIf="myForm.controls.password.hasError('required')">Password is required.</span>
+          <span *ngIf="myForm.get('email').invalid">Invalid password.</span>
+          <span *ngIf="myForm.get('password').value.length">Password must be at least 8 characters.</span>
+        </mat-error>
+    </mat-form-field>
+      <br/>
+        <button class="btn btn-primary position-relative top-80 start-0 end-50 translate-left" >Login</button>
+        or register <a routerLink="/register" >here</a>
+  </form>
 
-  <div class="form-group">
-    <label>Email:</label>
-    <input  class="form-control" formControlName="email" type="text" />
-    <!-- validation -->
-    <div *ngIf="myForm.get('email').invalid && (myForm.get('email').dirty || myForm.get('email').touched)" class="text-danger">
-      <div *ngIf="myForm.controls.email.hasError('required')">Email is required.</div>
-      <div *ngIf="myForm.get('email').invalid">Invalid email.</div>
-    </div>
-
-    <label>Password:</label>
-    <input class="form-control" type="password" formControlName="password"  />
-    <!-- validation -->
-    <div *ngIf="myForm.get('password').invalid && (myForm.get('password').dirty || myForm.get('password').touched)" class="text-danger">
-      <div *ngIf="myForm.controls.password.hasError('required')">Password is required.</div>
-      <div *ngIf="myForm.get('email').invalid">Invalid password.</div>
-      <div *ngIf="myForm.get('password').value.length">Password must be at least 8 characters.</div>
-    </div>
-
-    <button class="btn btn-primary" >Login</button>
-    or register <a routerLink="/register" >here</a>
-    </div>
-</form>
-
+  </div>
 </div>

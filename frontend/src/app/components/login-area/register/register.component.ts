@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
   public cities: any[];
   public filteredCities: string[] = [];
   public myForm: FormGroup;
+  hide = true;
 
 constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router:Router ) {
 this.myForm = this.formBuilder.group({

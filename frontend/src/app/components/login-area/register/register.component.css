@@ -1,0 +1,64 @@
+/* .example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+} */
+
+.example-full-width {
+  width: 100%;
+}
+.mat-label{
+  height: 50px;
+}
+
+.card-container{
+  /* float:left; */
+  padding: 15px;
+  height:max-content;
+  width:70%;
+  box-shadow: 0px 0px 15px -5px;
+
+}
+
+form{
+  position: relative;
+  width: max-content;
+
+}
+form button {
+    font-family: Arial;
+    width:max-content;
+    /* position: absolute; */
+    /* border-color: #428bca; */
+    /* background-color: rgb(245, 123, 17); */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    cursor: hand;
+    margin-bottom: 3px;
+  }
+
+.card-container div{
+  width:150%;
+  margin: 25px;
+  margin-top: 5px;
+}
+
+
+.main{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h3{
+  text-align: left;
+}
+.example-form-fields {
+  display: flex;
+  align-items: flex-start;
+}
+mat-form-field + mat-form-field {
+  margin-left: 20px;
+}

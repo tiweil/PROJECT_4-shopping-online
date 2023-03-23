@@ -10,7 +10,7 @@ import { ClientModel } from 'src/app/models/client.model';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
+  hide=true;
   public existsClient = new ClientModel();
 
   public backToHome(){

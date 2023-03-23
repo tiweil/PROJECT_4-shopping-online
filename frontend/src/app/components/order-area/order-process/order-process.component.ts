@@ -46,7 +46,7 @@ export class OrderProcessComponent implements OnInit{
       city: ['', Validators.required],
       street: ['', Validators.required],
       arrival_date:['',Validators.required],
-      last_fourCC:['',[Validators.required,Validators.pattern(/^[0-9]*$/),Validators.maxLength(16),Validators.minLength(16)]],
+      last_fourCC:['',[Validators.required,Validators.pattern(/^[0-9]*$/)]],
       // sum:['',Validators.required],
     });
 

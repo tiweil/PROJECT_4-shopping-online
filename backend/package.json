@@ -2,7 +2,7 @@
   "name": "project4",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.ts",
   "scripts": {
     "test": "jest --coverage",
     "server": "nodemon --exec ts-node server.ts"
