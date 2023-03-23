@@ -90,7 +90,7 @@ export class ProductListUserComponent implements OnInit {
       }else{
         await this.itemService.AddItemToCart(this.newItem);
         console.log( this.allItems );
-        alert("Product has been add to your cart");
+        // alert("Product has been add to your cart");
       }
 
     } catch (err) {

@@ -33,7 +33,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Choose an arrival date</mat-label>
-        <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" formControlName="arrival_date">
+        <input matInput type="date" [min]="minDate" [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" formControlName="arrival_date">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>

@@ -33,9 +33,8 @@ export class OrderProcessComponent implements OnInit{
   public sum:number=0;
   public myCart:CartModel;
   blockedDates: Date[];
-  // public Times:object={
-
-  // };
+  //כדי שבבחירת תאריך לא יתן אפשרות לבחור תאריך ישן
+  public minDate: Date = new Date();
 
   constructor(private formBuilder: FormBuilder,
               private orderService: OrderService,
