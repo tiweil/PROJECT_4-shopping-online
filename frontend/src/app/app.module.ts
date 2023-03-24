@@ -37,7 +37,7 @@ import { MatFormFieldControl, MatFormFieldModule} from '@angular/material/form-f
 import { MatInputModule } from '@angular/material/input';
 import {MatDialogActions, MatDialogModule } from '@angular/material/dialog';
 import { OrderCompleteComponent } from './components/order-area/order-complete/order-complete.component';
-import { HighlighterPipe } from './highlighter.pipe';
+import { HighlightSearch } from './highlightSearch';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -82,7 +82,7 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
     OrderDetailsComponent,
     OrderProcessComponent,
     OrderCompleteComponent,
-    HighlighterPipe
+    HighlightSearch
 
 
   ],
