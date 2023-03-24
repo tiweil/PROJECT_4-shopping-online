@@ -1,9 +1,9 @@
 <!-- <p>product-list works!</p> -->
 <mat-toolbar style="position:sticky;">
   <mat-toolbar-row>
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" >
-      <mat-button-toggle class="nav-link active" [style.width]="buttonWidth" (click)="sortByCategory('all')" style="font-size: 17px;">All</mat-button-toggle>
-      <mat-button-toggle class="nav-link active" [style.width]="buttonWidth" *ngFor="let c of categories" (click)="sortByCategory(c._id)" style="font-size: 17px;" mat-button color="primary">{{c.name}}</mat-button-toggle>
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" style="height:50px;">
+      <mat-button-toggle class="nav-link active" [style.width]="buttonWidth" (click)="sortByCategory('all')" style="font-size: 17px;text-align:left ;top:0;">All</mat-button-toggle>
+      <mat-button-toggle class="nav-link active" [style.width]="buttonWidth" *ngFor="let c of categories" (click)="sortByCategory(c._id)" style="font-size: 17px;padding-left: 0;" mat-button color="primary">{{c.name}}</mat-button-toggle>
     </mat-button-toggle-group>
     <form class=" input-group w-auto" style="position: absolute; right: 0;margin-right: 25px;" id="search-form" >
       <input
