@@ -11,14 +11,15 @@
     Search
   </button> -->
   <div class="search-input">
-    <label for="">Search here: </label> <input [(ngModel)]="searchText" type="search">
-   </div>
+    <label for="">Search here: </label>
+     <!-- <input [(ngModel)]="searchText" type="search"> -->
+     <input type="text" [(ngModel)]="searchInput" placeholder="Search..." (input)="highlightText()">   </div>
    <!--[innerHtml]="temp.productId.name|highlighter:searchText:'partial"-->
 <table mat-table [dataSource]="temp" class="mat-elevation-z8" >
   <!-- Item Column -->
   <ng-container matColumnDef="item" >
     <th mat-header-cell *matHeaderCellDef> Item </th>
-    <td mat-cell *matCellDef="let temp" > {{temp.productId.name}} </td>
+    <td mat-cell *matCellDef="let temp" #textToHighlight> {{temp.productId.name}} </td>
     <td mat-footer-cell *matFooterCellDef > Total </td>
   </ng-container>
 

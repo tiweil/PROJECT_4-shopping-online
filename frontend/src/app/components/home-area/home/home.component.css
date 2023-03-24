@@ -1,0 +1,40 @@
+div {
+  height: 100%;
+  box-sizing: border-box;
+  display:grid;
+  grid-template-rows: 20% 80%;
+  grid-template-columns: repeat(2, 1fr);
+}
+main,aside{
+  margin-top: 30px;
+}
+main div{
+  display:grid;
+  grid-template-columns: repeat(1, 1fr);
+
+}
+/* main{
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  place-items: center;
+
+} */
+/* main div{
+  padding-top:45%;
+
+}*/
+main p{
+  margin:15%;
+  margin-top:30%;
+  text-align:center;
+  font-size:45px;
+  font-family:Tahoma,sans-serif;
+  color:rgb(1, 107, 255);
+
+}
+span{
+  font-family:impact,sans-serif;
+}
+

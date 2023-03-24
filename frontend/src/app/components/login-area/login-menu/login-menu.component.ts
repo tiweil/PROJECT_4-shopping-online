@@ -20,6 +20,7 @@ export class LoginMenuComponent implements OnInit {
     })
   }
   public logout(){
+    alert("good bye");
     this.loginService.logout();
   }
 }

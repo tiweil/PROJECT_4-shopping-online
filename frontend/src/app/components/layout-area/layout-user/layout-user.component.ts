@@ -6,9 +6,11 @@ import { map, shareReplay } from 'rxjs/operators';
 @Component({
   selector: 'app-layout-user',
   templateUrl: './layout-user.component.html',
-  styleUrls: ['./layout-user.component.css']
+  styleUrls: ['./layout-user.component.css'],
+
 })
 export class LayoutUserComponent {
+  opened=true;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
   .pipe(
     map(result => result.matches),

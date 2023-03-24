@@ -4,7 +4,25 @@
     <app-header-user></app-header-user>
   </header> -->
 
-  <aside class="border-0 aside">
+  <main class="border-0">
+
+    <mat-sidenav-container class="example-container border-0" >
+      <mat-sidenav #sidenav class="example-sidenav border-0" [(opened)]="opened" position="start">
+        <app-items-cart></app-items-cart>
+      </mat-sidenav>
+      <div class="example-sidenav-content border-0">
+        <button type="button" position="end" class="btn btn-outline-primary position-abolute top-30 start-45 end-50 translate-left border-0" style="width: max-content;margin-right: 90px;font-weight:500;" mat-button (click)="sidenav.toggle()">
+          Open cart
+        </button>
+      </div>
+      <router-outlet class="border-0"></router-outlet>
+      <app-product-list-user pageScroll class="border-0"></app-product-list-user>
+
+    </mat-sidenav-container>
+
+  </main>
+
+  <!-- <aside class="border-0 aside">
     <app-items-cart class="border-0"></app-items-cart>
   </aside>
 
@@ -13,6 +31,6 @@
       <router-outlet class="border-0"></router-outlet>
       <app-product-list-user class="border-0"></app-product-list-user>
 
-  </main>
+  </main> -->
 
 </div>

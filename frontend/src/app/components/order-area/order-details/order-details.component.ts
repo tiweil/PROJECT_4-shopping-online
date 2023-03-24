@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, ElementRef, Input, OnInit, PipeTransform, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { CartModel } from 'src/app/models/cart.model';
 import { ItemModel } from 'src/app/models/item.model';
 import { ProductModel } from 'src/app/models/product.model';
+import { itemStore } from 'src/app/redux/item-state';
 import { clientStore } from 'src/app/redux/login-state';
 import { ItemService } from 'src/app/services/item.service';
 
@@ -19,7 +20,7 @@ export interface Transaction {
   templateUrl: './order-details.component.html',
   styleUrls: ['./order-details.component.css']
 })
-export class OrderDetailsComponent implements OnInit{
+export class OrderDetailsComponent implements OnInit,PipeTransform{
   public myCart: CartModel;
   public items: ItemModel[];
   public allItems :ItemModel[];
@@ -27,17 +28,34 @@ export class OrderDetailsComponent implements OnInit{
   public temp:ItemModel[];
   public searchText="";
 
+  //for to search item
+  public  searchInput: string = '';
+  @ViewChild('textToHighlight') textToHighlight: ElementRef;
+
   @Input() isModal:boolean;
   constructor(private itemService: ItemService,private router: Router) {}
 
-  public searchItem(data:string){
-    const regex: RegExp = new RegExp(data, 'gi');
-
-    this.temp=this.items.filter(item=>{return item.productId.name.includes(data)});
-    this.temp.map(item=>{
-      item.productId.name=item.productId.name.replace(regex, '<mark>$&</mark>');
-    })
+  highlightText() {
+    const query = this.searchInput.toLowerCase();
+    const text = this.textToHighlight.nativeElement.innerHTML;
+    const highlighted = text.replace(new RegExp(query, 'gi'), `<span class="highlight">${query}</span>`);
+    this.textToHighlight.nativeElement.innerHTML = highlighted;
   }
+  transform(value: string, searchInput: string): string {
+    if (!searchInput) {
+      return value;
+    }
+    const pattern = new RegExp(searchInput, 'gi');
+    return value.replace(pattern, '<span class="highlight">$&</span>');
+  }
+  // public searchItem(data:string){
+  //   const regex: RegExp = new RegExp(data, 'gi');
+
+  //   this.temp=this.items.filter(item=>{return item.productId.name.includes(data)});
+  //   this.temp.map(item=>{
+  //     item.productId.name=item.productId.name.replace(regex, '<mark>$&</mark>');
+  //   })
+  // }
   public async ngOnInit() {
     try {
       this.myCart = clientStore.getState().cart;
@@ -46,7 +64,11 @@ export class OrderDetailsComponent implements OnInit{
         this.myCart = clientStore.getState().cart;
       })
 
-      this.items = await this.itemService.itemsByCart(this.myCart._id);
+     //this.items = await this.itemService.itemsByCart(this.myCart._id);
+     this.items =  itemStore.getState().items
+     itemStore.subscribe(() => {
+       this.items = itemStore.getState().items;
+     })
       console.log(this.items);
       // this.productItem = this.items[0].productId;
       console.log(this.items[0].productId);

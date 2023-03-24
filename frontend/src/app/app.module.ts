@@ -46,6 +46,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
+import { TableVirtualScrollModule } from 'ng-cdk-table-virtual-scroll';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+
 
 
 @NgModule({
@@ -81,6 +84,7 @@ import {MatIconModule} from '@angular/material/icon';
     OrderCompleteComponent,
     HighlighterPipe
 
+
   ],
   imports: [
     BrowserModule,
@@ -97,6 +101,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatDividerModule,
     MatIconModule,
     AppRoutingModule,
+    NgxPageScrollCoreModule,
+    TableVirtualScrollModule,
     FormsModule,//Two way binding
     HttpClientModule, //http
     ReactiveFormsModule, BrowserAnimationsModule
