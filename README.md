@@ -1,10 +1,11 @@
-��#� �p�r�o�j�e�c�t�4�
-�
-�
+#Project 4
+
 # backend
 
 ## Backend Development Server
 Run `nodemon` for a dev server. Navigate to `http://localhost:3004/`. The application will automatically reload if you change any of the source files.
+## Database
+We currently use a local MongoDB as database, make sure to istall MongoDB to your computer if you dont have it yet.
 
 # frontend
 
