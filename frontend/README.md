@@ -25,3 +25,14 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## explanation
+
+This site was established as a final project on behalf of John Bryce College, it is a shopping site whose backend was written in nodeJS and MongoDB as a database and the frontend was built in Angular and written in Typescript.
+
+The project was done as a team work by Chaya Maman, Sivan Saban and Tirza Weiss.
+
+The admin has the option to add and delete products.
+When adding a product, please note that when inserting a link to the image, the link will have the extension PNG, JPG, GIF.
+The product name will not be more than 40 characters.
+The price will not exceed 1000 shekels.
